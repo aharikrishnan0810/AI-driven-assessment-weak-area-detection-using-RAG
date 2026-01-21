@@ -1,7 +1,5 @@
 # AI-Based Placement Practice & MCQ Intelligence Platform
 
-![Platform Screenshot](frontend/screenshot-dashboard.png)
-
 **AI-Based Placement Practice** is an interactive platform designed to help students prepare for placement tests using AI-generated MCQs. It leverages company-specific data to generate personalized quizzes and provides detailed feedback to identify strengths and weaknesses.
 
 ---
