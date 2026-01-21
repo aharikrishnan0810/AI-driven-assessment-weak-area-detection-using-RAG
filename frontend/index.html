@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Placement Practice AI Platform</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo-box">A</div>
+            <span class="sidebar-title">PlacementAI</span>
+        </div>
+
+        <nav class="nav-section">
+            <div class="nav-item active" data-page="dashboard">
+                <span class="nav-icon">📊</span>
+                Dashboard
+            </div>
+        </nav>
+
+        <div class="nav-label">Admin Panel</div>
+        <nav class="nav-section">
+            <div class="nav-item" data-page="upload">
+                <span class="nav-icon">📁</span>
+                Upload Company Files
+            </div>
+            <div class="nav-item" data-page="ingest">
+                <span class="nav-icon">⚡</span>
+                Ingest Company Data
+            </div>
+        </nav>
+
+        <div class="nav-label">Student Panel</div>
+        <nav class="nav-section">
+            <div class="nav-item" data-page="generate">
+                <span class="nav-icon">🧠</span>
+                Generate MCQs
+            </div>
+            <div class="nav-item" data-page="take-test">
+                <span class="nav-icon">📝</span>
+                Take Test
+            </div>
+            <div class="nav-item" data-page="results">
+                <span class="nav-icon">🏆</span>
+                Results & Feedback
+            </div>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="main-wrapper">
+        <header class="top-bar">
+            <h2 id="pageTitle">Dashboard</h2>
+            <div class="user-profile">
+                <span style="font-weight: 500;">Practice Mode</span>
+            </div>
+        </header>
+
+        <main class="content-area" id="mainContent">
+            <!-- Dynamic Content Injected Here -->
+        </main>
+    </div>
+
+    <!-- Templates -->
+    <template id="tpl-dashboard">
+        <div class="welcome-section">
+            <h1 style="font-size: 2rem; margin-bottom: 0.5rem;">Placement Practice Portal</h1>
+            <p style="color: var(--neutral); margin-bottom: 2rem;">Master your upcoming placements with AI-powered MCQ
+                generation and personalized feedback.</p>
+
+            <div class="stats-grid">
+                <div class="card stat-card" style="max-width: 300px;">
+                    <span class="stat-label">Companies Uploaded</span>
+                    <span class="stat-val" id="count-companies">0</span>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 2rem; border-left: 4px solid var(--primary); background: #f8fafc;">
+                <h3 class="card-title">Placement Inspiration</h3>
+                <div style="font-style: italic; color: #475569; padding: 1rem 0;">
+                    <p style="margin-bottom: 1rem;">"The only way to do great work is to love what you do. If you
+                        haven't found it yet, keep looking. Don't settle." — Steve Jobs</p>
+                    <p style="margin-bottom: 1rem;">"Success is not final, failure is not fatal: it is the courage to
+                        continue that counts." — Winston Churchill</p>
+                    <p>"Opportunities don't happen, you create them." — Chris Grosser</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title">How It Works</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                    <div>
+                        <strong style="display: block; margin-bottom: 0.5rem;">1. Admin Ingestion</strong>
+                        <p style="font-size: 0.875rem; color: var(--neutral);">Upload company specific documents like
+                            past papers or company profiles.</p>
+                    </div>
+                    <div>
+                        <strong style="display: block; margin-bottom: 0.5rem;">2. AI generation</strong>
+                        <p style="font-size: 0.875rem; color: var(--neutral);">Select a topic and company to generate
+                            tailored MCQ questions.</p>
+                    </div>
+                    <div>
+                        <strong style="display: block; margin-bottom: 0.5rem;">3. Practice & Improve</strong>
+                        <p style="font-size: 0.875rem; color: var(--neutral);">Attempt tests and receive detailed AI
+                            feedback on your performance.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="tpl-upload">
+        <div style="max-width: 600px; margin: 0 auto;">
+            <div class="card">
+                <h3 class="card-title">Upload Company File</h3>
+                <p style="color: var(--neutral); margin-bottom: 1.5rem; font-size: 0.875rem;">Upload PDF or TXT files to
+                    train the AI on company-specific placement patterns.</p>
+
+                <form id="uploadForm">
+                    <div class="form-group">
+                        <label class="label">Company Name</label>
+                        <input type="text" class="input" id="companyName" placeholder="e.g. Google, TCS, Infosys"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label class="label">Select File (PDF / TXT)</label>
+                        <input type="file" class="input" id="companyFile" accept=".pdf,.txt" required>
+                    </div>
+                    <div id="uploadStatus"></div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
+                        <span id="uploadBtnText">Upload Company Data</span>
+                        <div id="uploadLoader" class="loader hidden"></div>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </template>
+
+    <template id="tpl-ingest">
+        <div style="max-width: 600px; margin: 0 auto;">
+            <div class="card">
+                <h3 class="card-title">Ingest Company Data</h3>
+                <p style="color: var(--neutral); margin-bottom: 1.5rem; font-size: 0.875rem;">Process uploaded files to
+                    create AI embeddings for RAG-based generation.</p>
+
+                <form id="ingestForm">
+                    <div class="form-group">
+                        <label class="label">Select Company</label>
+                        <select class="select" id="ingestCompany" required>
+                            <option value="" disabled selected>Choose a company...</option>
+                            <!-- Options populated via JS -->
+                        </select>
+                    </div>
+                    <div id="ingestStatus"></div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
+                        <span id="ingestBtnText">Start Ingestion</span>
+                        <div id="ingestLoader" class="loader hidden"></div>
+                    </button>
+                </form>
+            </div>
+
+            <div id="ingestResultCard" class="card hidden" style="border-left: 5px solid var(--success);">
+                <h4 style="color: var(--success); margin-bottom: 0.5rem;">Ingestion Complete!</h4>
+                <div style="font-size: 0.875rem;">
+                    <p><strong>Status:</strong> Embedded</p>
+                    <p><strong>Chunks Processed:</strong> <span id="chunkCount">0</span></p>
+                    <p style="margin-top: 0.5rem;">Company data is ready for MCQ generation.</p>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="tpl-generate">
+        <div style="max-width: 600px; margin: 0 auto;">
+            <div class="card">
+                <h3 class="card-title">Generate Practice MCQs</h3>
+                <p style="color: var(--neutral); margin-bottom: 1.5rem; font-size: 0.875rem;">Configure your test
+                    parameters. AI will generate questions based on your selection.</p>
+
+                <form id="generateForm">
+                    <div class="form-group">
+                        <label class="label">Company (Optional for RAG)</label>
+                        <select class="select" id="genCompany">
+                            <option value="">General (No Company)</option>
+                            <!-- Options populated via JS -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="label">Choose Topic</label>
+                        <select class="select" id="genTopic" required>
+                            <option value="Aptitude">Aptitude</option>
+                            <option value="English">English</option>
+                            <option value="Debugging">Debugging</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="label">Number of Questions</label>
+                        <input type="number" class="input" id="genCount" min="1" max="50" value="10" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
+                        <span>Generate MCQs</span>
+                        <div id="genLoader" class="loader hidden"></div>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </template>
+
+    <template id="tpl-take-test">
+        <div class="test-container" style="max-width: 800px; margin: 0 auto;">
+            <div class="card" id="testCard">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                    <span style="font-weight: 600; color: var(--primary);" id="currentQNum">Question 1 of 10</span>
+                    <span id="testTimer" style="font-family: monospace; font-weight: bold;">--:--</span>
+                </div>
+
+                <div class="progress-bar"
+                    style="height: 8px; background: #e2e8f0; border-radius: 4px; margin-bottom: 2rem; overflow: hidden;">
+                    <div id="testProgress"
+                        style="height: 100%; background: var(--primary); width: 10%; transition: var(--transition);">
+                    </div>
+                </div>
+
+                <div id="questionContainer">
+                    <h4 id="questionText" style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 1.5rem;">Loading
+                        question...</h4>
+
+                    <div class="options-list" id="optionsList">
+                        <!-- Options injected here -->
+                    </div>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; margin-top: 2rem;">
+                    <button class="btn" id="prevQ" style="background: #e2e8f0; color: #475569;">Previous</button>
+                    <button class="btn btn-primary" id="nextQ">Next Question</button>
+                    <button class="btn btn-success hidden" id="submitTest">Submit Final Answers</button>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="tpl-results">
+        <div style="max-width: 800px; margin: 0 auto;">
+            <div class="card" style="text-align: center; padding: 3rem 2rem;">
+                <h1 style="font-size: 3rem; margin-bottom: 0.5rem;" id="resScore">--%</h1>
+                <p style="font-size: 1.25rem; font-weight: 600; color: var(--neutral);" id="resMsg">Analysis in
+                    progress...</p>
+                <p style="margin-top: 1rem; color: var(--neutral);">Questions Correct: <span
+                        id="resCorrect">--/--</span></p>
+
+                <div style="margin-top: 2rem; display: flex; justify-content: center; gap: 1rem;">
+                    <button class="btn btn-primary" onclick="app.navigate('generate')">Retry Test</button>
+                    <button class="btn" style="background: #e2e8f0;">Download PDF</button>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+                <div class="card" style="border-top: 4px solid var(--warning);">
+                    <h4 style="margin-bottom: 1rem;">💡 Improvement Suggestions</h4>
+                    <ul id="resSuggestions"
+                        style="font-size: 0.875rem; color: #475569; padding-left: 1.25rem; line-height: 1.6;">
+                        <!-- List items -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
