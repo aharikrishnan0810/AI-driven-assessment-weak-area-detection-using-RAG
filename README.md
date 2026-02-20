@@ -3,6 +3,7 @@
 **AI-Based Placement Practice** is an interactive platform designed to help students prepare for placement tests using AI-generated MCQs. It leverages company-specific data to generate personalized quizzes and provides detailed feedback to identify strengths and weaknesses.
 
 ---
+*Built by  ❤️  HARI KRISHNAN -A RAMCO INSTITUTE OF TECHNOLOGY -using FastAPI, Google Gemini AI, ChromaDB, and Vanilla JavaScript.*
 
 ## Features
 
@@ -642,8 +643,6 @@ http://127.0.0.1:8001
 This project is developed as an academic final-year engineering project.
 
 ---
-
-*Built with ❤️ using FastAPI, Google Gemini AI, ChromaDB, and Vanilla JavaScript.*
 
 
 ## How to Run
