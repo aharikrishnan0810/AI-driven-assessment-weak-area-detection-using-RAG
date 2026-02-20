@@ -1,82 +1,10 @@
 # AI-Based Placement Practice & MCQ Intelligence Platform
 
 **AI-Based Placement Practice** is an interactive platform designed to help students prepare for placement tests using AI-generated MCQs. It leverages company-specific data to generate personalized quizzes and provides detailed feedback to identify strengths and weaknesses.
-
+> **An intelligent placement preparation platform** that uses Retrieval-Augmented Generation (RAG) and Google Gemini AI to generate company-specific MCQs, administer interactive tests, and deliver personalized performance feedback.
 ---
 *Built by  ❤️  HARI KRISHNAN -A RAMCO INSTITUTE OF TECHNOLOGY -using FastAPI, Google Gemini AI, ChromaDB, and Vanilla JavaScript.*
 
-## Features
-
-### 1. Modern Dashboard
-- High-level overview of key performance indicators.
-- Clear explanation of the platform's utility.
-- Professional UI with modern typography and interactive cards.
-
-![Dashboard Screenshot](frontend/screenshot-dashboard.png)
-
----
-
-### 2. Admin Workflow
-- **Company File Upload**: Supports document uploads with real-time feedback and loaders.
-- **Data Ingestion**: Multi-step process for preparing uploaded data for RAG-based MCQ generation.
-- Shows detailed processing stats for each data chunk.
-
-![Admin Workflow Screenshot](frontend/screenshot-admin.png)
-
----
-
-### 3. Student Workflow
-- **MCQ Generation**: Personalized questions by topic (Aptitude, English, Debugging) and company data.
-- **Interactive Testing**: SPA-style test environment with progress tracking.
-- **AI Feedback**: Post-test analysis highlighting strengths, weaknesses, and suggested improvements.
-
-![Student Test Screenshot](frontend/screenshot-student.png)
-
----
-
-### 4. Verification & Navigation
-- All sidebar links navigate correctly without page reloads (SPA behavior).
-- Answers, scores, and page states are preserved during interactions.
-- Forms handle simulated API latencies with loaders and status messages.
-
-![Verification Screenshot](frontend/screenshot-verification.png)
-
----
-
-### 5. Visual Excellence
-- Consistent **Inter typography**.
-- Rounded corners (12px), soft shadows, and professional blue/gray/success palette.
-- Hover states on interactive elements.
-- Clean and modern UI for both admin and student workflows.
-
----
-
-# AI-Driven Assessment & Weak Area Detection using RAG
-
-> **An intelligent placement preparation platform** that uses Retrieval-Augmented Generation (RAG) and Google Gemini AI to generate company-specific MCQs, administer interactive tests, and deliver personalized performance feedback.
-
----
-
-## Table of Contents
-
-1. [Project Overview](#1-project-overview)
-2. [Key Features](#2-key-features)
-3. [System Architecture](#3-system-architecture)
-4. [Technology Stack](#4-technology-stack)
-5. [Project Structure](#5-project-structure)
-6. [Workflow Diagrams](#6-workflow-diagrams)
-   - [Admin Ingestion Workflow](#61-admin-ingestion-workflow)
-   - [Student MCQ Generation Workflow](#62-student-mcq-generation-workflow)
-   - [RAG Pipeline](#63-rag-pipeline)
-   - [Test & Feedback Workflow](#64-test--feedback-workflow)
-7. [API Reference](#7-api-reference)
-8. [Frontend SPA Architecture](#8-frontend-spa-architecture)
-9. [Setup & Installation](#9-setup--installation)
-10. [Environment Variables](#10-environment-variables)
-11. [Running the Application](#11-running-the-application)
-12. [Screenshots](#12-screenshots)
-
----
 
 ## 1. Project Overview
 
@@ -546,8 +474,43 @@ app.navigate(pageId)
 ```
 
 ---
+## 9.Features
 
-## 9. Setup & Installation
+### 1. Modern Dashboard
+- High-level overview of key performance indicators.
+- Clear explanation of the platform's utility.
+- Professional UI with modern typography and interactive cards.
+
+![Dashboard Screenshot](frontend/screenshot-dashboard.png)
+
+---
+
+### 2. Admin Workflow
+- **Company File Upload**: Supports document uploads with real-time feedback and loaders.
+- **Data Ingestion**: Multi-step process for preparing uploaded data for RAG-based MCQ generation.
+- Shows detailed processing stats for each data chunk.
+
+![Admin Workflow Screenshot](frontend/screenshot-admin.png)
+
+---
+
+### 3. Student Workflow
+- **MCQ Generation**: Personalized questions by topic (Aptitude, English, Debugging) and company data.
+- **Interactive Testing**: SPA-style test environment with progress tracking.
+- **AI Feedback**: Post-test analysis highlighting strengths, weaknesses, and suggested improvements.
+
+![Student Test Screenshot](frontend/screenshot-student.png)
+
+---
+
+### 4. Verification & Navigation
+- All sidebar links navigate correctly without page reloads (SPA behavior).
+- Answers, scores, and page states are preserved during interactions.
+- Forms handle simulated API latencies with loaders and status messages.
+
+![Verification Screenshot](frontend/screenshot-verification.png)
+
+## 10. Setup & Installation
 
 ### Prerequisites
 
@@ -589,7 +552,7 @@ GEMINI_API_KEY=your_api_key_here
 
 ---
 
-## 10. Environment Variables
+## 11. Environment Variables
 
 Create a `.env` file in the project root with the following variables:
 
@@ -608,7 +571,7 @@ ADMIN_SECRET_KEY=your_secure_secret_key
 
 ---
 
-## 11. Running the Application
+## 12. Running the Application
 
 **Start the backend server:**
 ```bash
